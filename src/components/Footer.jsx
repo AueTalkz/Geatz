@@ -1,23 +1,23 @@
 import { Link } from 'react-router-dom';
-import './Footer.css';
 
-const Footer = () => {
-  return (
-    <footer className="footer">
-      <div className="container footer-grid grid">
-        <div className="footer-col">
-          <Link to="/" className="brand">GEATZ</Link>
-          <p className="text-meta text-secondary mt-1">VIDEO EDITOR · CONTENT CREATOR</p>
-          <p className="text-meta text-secondary mt-1">EDIT · CREATE · THINK</p>
-        </div>
-        
-        <div className="footer-col align-right">
-          <p className="text-meta text-secondary mb-1">© 2026 GEATZ</p>
-          <p className="text-body text-secondary">Built around ideas, not templates.</p>
-        </div>
+const Footer = () => (
+  <footer className="footer">
+    <div className="container footer-inner">
+      <div>
+        <Link to="/" className="footer-brand">GEATZ</Link>
+        <p className="footer-tagline uppercase">VIDEO EDITOR · CONTENT CREATOR</p>
+        <p className="footer-tagline mt-1">EDIT · CREATE · THINK</p>
       </div>
-    </footer>
-  );
-};
+      <div style={{ display:'flex', flexDirection:'column', gap:'1rem', alignItems:'flex-end' }}>
+        <div className="footer-links">
+          <a href="mailto:hello@geatz.com">Email</a>
+          <a href="#" target="_blank" rel="noreferrer">Instagram</a>
+          <a href="#" target="_blank" rel="noreferrer">YouTube</a>
+        </div>
+        <p className="footer-copy">© 2026 GEATZ — Built around ideas, not templates.</p>
+      </div>
+    </div>
+  </footer>
+);
 
 export default Footer;

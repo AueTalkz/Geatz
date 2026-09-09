@@ -1,39 +1,64 @@
+.about-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
 .lang-toggle {
-  border: 1px solid var(--border-color);
-  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border);
   border-radius: 999px;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  transition: border-color 0.3s;
+  margin-top: 1rem;
+  align-self: flex-start;
 }
+.lang-toggle:hover { border-color: var(--accent); }
+.lang-toggle span.active { color: var(--accent); }
+.lang-toggle .divider { color: var(--muted); }
 
-.lang-toggle:hover {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-}
-
-.about-content {
-  position: relative;
-}
-
-.lang-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--transition-normal);
-  font-size: var(--text-title);
-  line-height: 1.4;
+.about-text {
+  font-family: var(--font-display);
+  font-size: var(--h2);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   max-width: 1000px;
+  transition: opacity 0.28s ease;
+}
+.about-text.fading { opacity: 0; }
+.about-text p { margin-bottom: 1.25rem; }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+@media (min-width: 768px) {
+  .about-grid { grid-template-columns: 1fr 1fr; }
 }
 
-.lang-content.active {
-  position: relative;
-  opacity: 1;
-  pointer-events: auto;
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
 }
-
-.lang-content p {
-  margin-bottom: 1rem;
+.about-list li {
+  font-family: var(--font-display);
+  font-size: var(--body);
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  transition: color 0.3s, padding-left 0.3s;
+}
+.about-list li:hover {
+  color: var(--fg);
+  padding-left: 0.75rem;
 }

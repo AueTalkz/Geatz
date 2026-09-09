@@ -1,23 +1,24 @@
 import { Link } from 'react-router-dom';
-import './ProjectCard.css';
 
-const ProjectCard = ({ title, category, image, link, featured = false }) => {
-  return (
-    <Link to={link} className={`project-card ${featured ? 'featured' : ''}`}>
-      <div className="project-image-wrapper">
-        {image ? (
-          <img src={image} alt={title} className="project-image" loading="lazy" />
-        ) : (
-          <div className="project-image-placeholder"></div>
-        )}
+const ProjectCard = ({ title, category, image, link }) => (
+  <Link to={link} className="project-card" data-cursor="VIEW">
+    <div className="card-media">
+      {image
+        ? <img src={image} alt={title} loading="lazy" />
+        : <div className="card-media-placeholder">{title.charAt(0)}</div>
+      }
+      <div className="card-overlay">
+        <span className="card-overlay-btn">VIEW PROJECT ↗</span>
       </div>
-      <div className="project-meta">
-        <h3 className="project-title font-display">{title}</h3>
-        <p className="project-category text-meta text-secondary">{category}</p>
-        <div className="project-arrow">↗</div>
+    </div>
+    <div className="card-meta">
+      <div className="card-info">
+        <h3 className="card-title">{title}</h3>
+        <p className="card-cat">{category}</p>
       </div>
-    </Link>
-  );
-};
+      <span className="card-arrow">↗</span>
+    </div>
+  </Link>
+);
 
 export default ProjectCard;

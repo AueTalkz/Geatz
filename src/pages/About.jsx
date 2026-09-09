@@ -1,74 +1,100 @@
 import { useEffect, useState } from 'react';
+import useReveal from '../hooks/useReveal';
 import './About.css';
+
+const EN = [
+  "Not too long ago, I was just another fresher trying to figure out what came next.",
+  "School was done. College was done. But knowing what to do next wasn't exactly part of the syllabus.",
+  "I started experimenting.",
+  "Editing. Content. Scripts. Ideas. Projects. A lot of things that worked — and a lot that didn't.",
+  "Somewhere along the way, I realized I wasn't interested in just making things look good.",
+  "I wanted to understand why people watch, what makes content connect, and how an idea can become something real.",
+  "That's what I'm building now.",
+];
+
+const TA = [
+  "Konjam naal munnadi varaikum, naanum oru ordinary fresher thaan — next enna panrathu nu puriyama suthitu irunthen.",
+  "School mudinjithu. College mudinjithu. Aana life-la next enna panrathu nu entha syllabus layum illaye.",
+  "Appo thaan experiment panna start pannen.",
+  "Editing. Content. Scripts. Ideas. Projects. Neraya try pannen — sila vishayam workout aachu, neraya aagala.",
+  "Poga poga oru vishayam purinjithu: Enakku chumma paaka nalla irukku-nu video edit panrathula interest illa.",
+  "Makkal yen oru video paakuranga? Oru content eppadi connect aaguthu? Atha purinjikka aasa patten.",
+  "Ippo atha thaan build pannitu irukken.",
+];
+
+const skills  = ['VIDEO EDITING','CONTENT CREATION','SCRIPT WRITING','SHORT-FORM CONTENT','STORYTELLING','CONTENT STRATEGY','AI-ASSISTED CREATIVE WORKFLOWS'];
+const tools   = ['Premiere Pro','Filmora','Photoshop','AI Creative Tools'];
 
 const About = () => {
   const [lang, setLang] = useState('en');
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [fading, setFading] = useState(false);
+  useReveal();
+  useEffect(() => { window.scrollTo(0,0); }, []);
 
   const toggleLang = () => {
-    setLang(prev => prev === 'en' ? 'ta' : 'en');
+    setFading(true);
+    setTimeout(() => {
+      setLang(l => l === 'en' ? 'ta' : 'en');
+      setFading(false);
+    }, 280);
   };
 
+  const lines = lang === 'en' ? EN : TA;
+
   return (
-    <div className="page-transition-enter page-transition-enter-active">
-      <section className="section" style={{ paddingTop: 'calc(var(--space-xl) * 1.5)' }}>
+    <div className="page-enter" style={{ paddingTop:'120px' }}>
+      <section className="section" style={{ paddingTop:0 }}>
         <div className="container">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 'var(--space-sm)' }}>
-            <h1 className="text-hero font-display text-accent">SO, WHO IS GEATZ?</h1>
-            <button className="lang-toggle text-meta font-display" onClick={toggleLang}>
-              ENGLISH ↔ TANGLISH
+          <div className="about-top reveal">
+            <div>
+              <p className="section-label">ABOUT</p>
+              <h1 style={{ fontSize:'var(--hero)', letterSpacing:'-0.04em', lineHeight:'0.9', textTransform:'uppercase' }}>
+                SO, WHO<br />IS<br /><span className="text-accent">GEATZ?</span>
+              </h1>
+            </div>
+            <button className="lang-toggle" onClick={toggleLang} aria-label="Toggle language">
+              <span className={lang === 'en' ? 'active' : ''}>EN</span>
+              <span className="divider">↔</span>
+              <span className={lang === 'ta' ? 'active' : ''}>TA</span>
             </button>
           </div>
 
-          <div className="about-content mt-4" style={{ position: 'relative', minHeight: '60vh' }}>
-            <div className={`lang-content ${lang === 'en' ? 'active' : ''}`}>
-              <p>Not too long ago, I was just another fresher trying to figure out what came next.</p>
-              <p>School was done. College was done. But knowing what to do next wasn't exactly part of the syllabus.</p>
-              <p>I started experimenting.</p>
-              <p>Editing. Content. Scripts. Ideas. Projects. A lot of things that worked — and a lot that didn't.</p>
-              <p>Somewhere along the way, I realized I wasn't interested in just making things look good.</p>
-              <p>I wanted to understand why people watch, what makes content connect, and how an idea can become something real.</p>
-              <p>That's what I'm building now.</p>
-              <p className="mt-2 text-accent">Still learning. Still experimenting. Still building.</p>
-            </div>
-            
-            <div className={`lang-content ${lang === 'ta' ? 'active' : ''}`}>
-              <p>Konjam naal munnadi varaikum, naanum oru ordinary fresher thaan — next enna panrathu nu puriyama suthitu irunthen.</p>
-              <p>School mudinjithu. College mudinjithu. Aana life-la next enna panrathu nu entha syllabus layum illaye.</p>
-              <p>Appo thaan experiment panna start pannen.</p>
-              <p>Editing. Content. Scripts. Ideas. Projects. Neraya try pannen — sila vishayam workout aachu, neraya aagala.</p>
-              <p>Poga poga oru vishayam purinjithu: Enakku chumma paaka nalla irukku-nu video edit panrathula interest illa.</p>
-              <p>Makkal yen oru video paakuranga? Oru content eppadi connect aaguthu? Oru chinna idea eppadi perusaa maaruthu? Itha purinjikka aasa patten.</p>
-              <p>Ippo atha thaan build pannitu irukken.</p>
-              <p className="mt-2 text-accent">Innum kathukittu thaan irukken. Innum try pannitu thaan irukken. Innum build pannitu thaan irukken.</p>
-            </div>
+          <div className={`about-text reveal ${fading ? 'fading' : ''}`}>
+            {lines.map((line, i) => (
+              <p key={`${lang}-${i}`}>{line}</p>
+            ))}
+            <p className="text-accent" style={{ marginTop:'1rem' }}>
+              Still learning. Still experimenting. Still building.
+            </p>
           </div>
+        </div>
+      </section>
 
-          <div className="grid mt-4">
-            <div style={{ gridColumn: 'span 6' }}>
-              <h2 className="text-title font-display text-accent">SKILLS</h2>
-              <ul style={{ listStyle: 'none', padding: 0 }} className="text-secondary mt-1 text-body">
-                <li>VIDEO EDITING</li>
-                <li>CONTENT CREATION</li>
-                <li>SCRIPT WRITING</li>
-                <li>SHORT-FORM CONTENT</li>
-                <li>STORYTELLING</li>
-                <li>CONTENT STRATEGY</li>
-                <li>AI-ASSISTED CREATIVE WORKFLOWS</li>
+      <div className="marquee-wrap">
+        <div className="marquee-track">
+          {Array(12).fill(0).map((_, i) => (
+            <span key={i} className="marquee-item">STILL BUILDING <span className="dot">·</span></span>
+          ))}
+        </div>
+      </div>
+
+      <section className="section">
+        <div className="container">
+          <div className="about-grid">
+            <div className="reveal">
+              <p className="section-label">SKILLS</p>
+              <ul className="about-list">
+                {skills.map(s => <li key={s}>{s}</li>)}
               </ul>
             </div>
-            <div style={{ gridColumn: 'span 6' }}>
-              <h2 className="text-title font-display text-accent">TOOLS</h2>
-              <ul style={{ listStyle: 'none', padding: 0 }} className="text-secondary mt-1 text-body">
-                <li>Premiere Pro</li>
-                <li>Filmora</li>
-                <li>Photoshop</li>
-                <li>AI Creative Tools</li>
+            <div className="reveal reveal-delay-2">
+              <p className="section-label">TOOLS</p>
+              <ul className="about-list">
+                {tools.map(t => <li key={t}>{t}</li>)}
               </ul>
-              <p className="text-meta text-accent mt-2">TOOLS ARE SECONDARY TO OUTCOMES AND CREATIVE THINKING.</p>
+              <p style={{ fontSize:'var(--small)', letterSpacing:'0.06em', color:'var(--accent)', marginTop:'1.5rem', textTransform:'uppercase' }}>
+                Tools are secondary to outcomes and creative thinking.
+              </p>
             </div>
           </div>
         </div>
