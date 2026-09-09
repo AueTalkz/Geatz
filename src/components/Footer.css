@@ -1,0 +1,31 @@
+.footer {
+  padding: var(--space-xl) 0 var(--space-md);
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--space-xl);
+}
+
+.footer-grid {
+  /* Using standard grid from index.css */
+}
+
+.footer-col {
+  grid-column: span 4;
+}
+
+@media (min-width: 768px) {
+  .footer-col {
+    grid-column: span 4;
+  }
+  .align-right {
+    text-align: right;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-col {
+    grid-column: span 6;
+  }
+}
+
+.mt-1 { margin-top: 0.5rem; }
+.mb-1 { margin-bottom: 0.5rem; }
